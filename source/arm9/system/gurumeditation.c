@@ -5,7 +5,6 @@
 #include <stdio.h>
 
 #include <nds/arm9/background.h>
-#include <nds/arm9/console.h>
 #include <nds/arm9/exceptions.h>
 #include <nds/arm9/video.h>
 #include <nds/cpu_asm.h>
@@ -225,8 +224,6 @@ extern const char __itcm_start[];
 
 void guruMeditationDump(void)
 {
-    consoleDemoInit();
-
     // White text on a red background
     BG_PALETTE_SUB[0] = RGB15(31, 0, 0);
     BG_PALETTE_SUB[255] = RGB15(31, 31, 31);

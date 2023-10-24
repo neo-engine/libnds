@@ -2,8 +2,9 @@
 #
 # SPDX-FileContributor: Antonio Niño Díaz, 2023
 
-BLOCKSDS	?= /opt/blocksds/core
-BLOCKSDSEXT	?= /opt/blocksds/external
+export SHELL	:=	/usr/bin/env bash
+DEVKITPATH	=	$(shell echo "$(DEVKITPRO)" | sed -e 's/^\([a-zA-Z]\):/\/\1/')
+export PATH	:=	$(DEVKITPATH)/tools/bin:$(DEVKITPATH)/devkitARM/bin:$(PATH)
 
 # Source code paths
 # -----------------
@@ -42,8 +43,8 @@ ARCHIVE		:= lib/$(NAME).a
 PREFIX		:= arm-none-eabi-
 CC		:= $(PREFIX)gcc
 CXX		:= $(PREFIX)g++
-AR		:= ar
-MKDIR		:= mkdir
+AR		:= $(PREFIX)gcc-ar
+MKDIR	:= mkdir
 RM		:= rm -rf
 
 # Verbose flag
@@ -83,7 +84,7 @@ CFLAGS		+= -std=gnu17 $(WARNFLAGS) $(DEFINES) $(ARCH) \
 		   -ffunction-sections -fdata-sections \
 		   -fomit-frame-pointer
 
-CXXFLAGS	+= -std=gnu++14 $(WARNFLAGS) $(DEFINES) $(ARCH) \
+CXXFLAGS	+= -std=c++23 $(WARNFLAGS) $(DEFINES) $(ARCH) \
 		   -mthumb -mthumb-interwork $(INCLUDEFLAGS) -O2 \
 		   -ffunction-sections -fdata-sections \
 		   -fno-exceptions -fno-rtti \

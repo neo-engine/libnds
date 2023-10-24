@@ -6,7 +6,6 @@
 #include <stdlib.h>
 
 #include <nds/arm9/cache.h>
-#include <nds/arm9/console.h>
 #include <nds/arm9/input.h>
 #include <nds/arm9/sprite.h>
 #include <nds/bios.h>

@@ -58,8 +58,6 @@
 ///
 /// @section user_io_api User Input/ouput
 /// - @ref nds/arm9/input.h "Keypad and touch pad"
-/// - @ref nds/arm9/keyboard.h "Keyboard"
-/// - @ref nds/arm9/console.h "Console and Debug Printing"
 ///
 /// @section utility_api Utility
 /// - @ref nds/arm9/decompress.h "Decompression"
@@ -79,7 +77,6 @@
 /// - @ref nds/arm7/audio.h "Audio and microphone helpers"
 ///
 /// @section debug_api Debugging
-/// - @ref nds/arm9/console.h "Debug via printf to DS screen or NO$GBA"
 /// - @ref nds/debug.h "Send message to NO$GBA"
 /// - @ref nds/arm9/sassert.h "Simple assert"
 /// - @ref nds/arm9/exceptions.h "ARM9 exception handler"
@@ -122,14 +119,12 @@ extern "C" {
 #    include <nds/arm9/boxtest.h>
 #    include <nds/arm9/cache.h>
 #    include <nds/arm9/camera.h>
-#    include <nds/arm9/console.h>
 #    include <nds/arm9/decompress.h>
 #    include <nds/arm9/dynamicArray.h>
 #    include <nds/arm9/exceptions.h>
 #    include <nds/arm9/guitarGrip.h>
 #    include <nds/arm9/image.h>
 #    include <nds/arm9/input.h>
-#    include <nds/arm9/keyboard.h>
 #    include <nds/arm9/linkedlist.h>
 #    include <nds/arm9/math.h>
 #    include <nds/arm9/nand.h>

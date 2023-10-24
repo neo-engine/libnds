@@ -2,16 +2,15 @@
 #
 # SPDX-FileContributor: Antonio Niño Díaz, 2023
 
-BLOCKSDS	?= /opt/blocksds/core
-BLOCKSDSEXT	?= /opt/blocksds/external
+export SHELL	:=	/usr/bin/env bash
+DEVKITPATH	=	$(shell echo "$(DEVKITPRO)" | sed -e 's/^\([a-zA-Z]\):/\/\1/')
+export PATH	:=	$(DEVKITPATH)/tools/bin:$(DEVKITPATH)/devkitARM/bin:$(PATH)
 
 # Source code paths
 # -----------------
 
 SOURCEDIRS	:= source/arm9 source/common
 INCLUDEDIRS	:= include source source/common/ndsabi
-GFXDIRS		:= source/arm9/gfx
-BINDIRS		:= source/arm9
 
 # Defines passed to all files
 # ---------------------------
@@ -44,8 +43,8 @@ ARCHIVE		:= lib/$(NAME).a
 PREFIX		:= arm-none-eabi-
 CC		:= $(PREFIX)gcc
 CXX		:= $(PREFIX)g++
-AR		:= ar
-MKDIR		:= mkdir
+AR		:= $(PREFIX)gcc-ar
+MKDIR	:= mkdir
 RM		:= rm -rf
 
 # Verbose flag
@@ -59,15 +58,6 @@ endif
 
 # Source files
 # ------------
-
-ifneq ($(BINDIRS),)
-    SOURCES_BIN	:= $(shell find -L $(BINDIRS) -name "*.bin")
-    INCLUDEDIRS	+= $(addprefix $(BUILDDIR)/,$(BINDIRS))
-endif
-ifneq ($(GFXDIRS),)
-    SOURCES_PNG	:= $(shell find -L $(GFXDIRS) -name "*.png")
-    INCLUDEDIRS	+= $(addprefix $(BUILDDIR)/,$(GFXDIRS))
-endif
 
 SOURCES_S	:= $(shell find -L $(SOURCEDIRS) -name "*.s")
 SOURCES_C	:= $(shell find -L $(SOURCEDIRS) -name "*.c")
@@ -150,19 +140,6 @@ $(BUILDDIR)/%.cpp.o : %.cpp
 	@echo "  CXX.9   $<"
 	@$(MKDIR) -p $(@D)
 	$(V)$(CXX) $(CXXFLAGS) -MMD -MP -c -o $@ $<
-
-$(BUILDDIR)/%.bin.o $(BUILDDIR)/%_bin.h : %.bin
-	@echo "  BIN2C.9 $<"
-	@$(MKDIR) -p $(@D)
-	$(V)$(BLOCKSDS)/tools/bin2c/bin2c $< $(@D)
-	$(V)$(CC) $(CFLAGS) -MMD -MP -c -o $(BUILDDIR)/$*.bin.o $(BUILDDIR)/$*_bin.c
-
-$(BUILDDIR)/%.png.o $(BUILDDIR)/%.h : %.png %.grit
-	@echo "  GRIT.9  $<"
-	@$(MKDIR) -p $(@D)
-	$(V)$(BLOCKSDS)/tools/grit/grit $< -ftc -W1 -o$(BUILDDIR)/$*
-	$(V)$(CC) $(CFLAGS) -MMD -MP -c -o $(BUILDDIR)/$*.png.o $(BUILDDIR)/$*.c
-	$(V)touch $(BUILDDIR)/$*.png.o $(BUILDDIR)/$*.h
 
 # All assets must be built before the source code
 # -----------------------------------------------
