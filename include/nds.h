@@ -60,6 +60,10 @@
 /// @section user_io_api User Input/ouput
 /// - @ref nds/arm9/input.h "Keypad and touch pad"
 ///
+/// @section dsp_api DSi Teak DSP Utilities
+/// - @ref nds/arm9/teak/dsp.h "DSP general utilities"
+/// - @ref nds/arm9/teak/tlf.h "TLF format description"
+///
 /// @section utility_api Utility
 /// - @ref nds/arm9/decompress.h "Decompression"
 /// - @ref nds/arm9/image.h "Image Manipulation"
@@ -141,6 +145,8 @@ extern "C" {
 #    include <nds/arm9/video.h>
 #    include <nds/arm9/videoGL.h>
 #    include <nds/arm9/window.h>
+#    include <nds/arm9/teak/dsp.h>
+#    include <nds/arm9/teak/tlf.h>
 #endif // ARM9
 
 #ifdef ARM7
