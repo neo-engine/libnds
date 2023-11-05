@@ -6,8 +6,8 @@ export SHELL	:=	/usr/bin/env bash
 DEVKITPATH	=	$(shell echo "$(DEVKITPRO)" | sed -e 's/^\([a-zA-Z]\):/\/\1/')
 export PATH	:=	$(DEVKITPATH)/tools/bin:$(DEVKITPATH)/devkitARM/bin:$(PATH)
 
-WONDERFUL_TOOLCHAIN	?= /opt/wonderful/
-ARM_NONE_EABI_PATH	?= $(WONDERFUL_TOOLCHAIN)toolchain/gcc-arm-none-eabi/bin/
+WONDERFUL_TOOLCHAIN	?= /opt/wonderful
+ARM_NONE_EABI_PATH	?= $(WONDERFUL_TOOLCHAIN)/toolchain/gcc-arm-none-eabi/bin/
 
 # Source code paths
 # -----------------
